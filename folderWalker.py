@@ -7,7 +7,7 @@ for foldername, subfolders, filenames in os.walk(sys.argv[1]):
     filesize=0
     filecount=0
     for filename in filenames:
-        filesize=filesize+os.path.getsize(foldername+'\\'+filename)
+        filesize=filesize+os.path.getsize(foldername+'/'+filename)
         filecount=filecount+1
     if(filesize>=1073741824):
         print (foldername +','+str(filecount)+','+str(filesize)+','+'%2.1f'%(filesize/1073741824)+"GiB")

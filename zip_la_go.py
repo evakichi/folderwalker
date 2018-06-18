@@ -1,21 +1,16 @@
 import os
 import sys
+import zipfile
 import time
 timer=time.time()
-print ('FolderName,File Count,Real Datasize,Datasize')
+zipfile_name=sys.argv[1]+'.zip'
+print ('To Zip'+zipfile_name)
+bk_zip = zipfile.ZipFile(zipfile_name,'w')
 for foldername, subfolders, filenames in os.walk(sys.argv[1]):
-    filesize=0
-    filecount=0
+    print('Adding files in {}'.format(foldername))
+    bk_zip.write(foldername)
     for filename in filenames:
-        filesize=filesize+os.path.getsize(foldername+'\\'+filename)
-        filecount=filecount+1
-    if(filesize>=1073741824):
-        print (foldername +','+str(filecount)+','+str(filesize)+','+'%2.1f'%(filesize/1073741824)+"GiB")
-    elif(filesize>=1048576):
-        print (foldername +','+str(filecount)+','+str(filesize)+','+'%2.1f'%(filesize/1048576)+"MiB")
-    elif(filesize>=1024):
-        print (foldername +','+str(filecount)+','+str(filesize)+','+'%2.1f'%(filesize/1024)+"KiB")
-    else:
-        print (foldername +','+str(filecount)+','+str(filesize)+','+'%d'%(filesize)+"B")
+        bk_zip.write(os.path.join(foldername,filename))
+bk_zip.close()
 timer=time.time()-timer
 print (str(timer)+"sec")

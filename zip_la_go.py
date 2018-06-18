@@ -5,7 +5,7 @@ import time
 timer=time.time()
 zipfile_name=sys.argv[1]+'.zip'
 print ('To Zip'+zipfile_name)
-bk_zip = zipfile.ZipFile(zipfile_name,'w')
+bk_zip = zipfile.ZipFile(zipfile_name,'w',zipfile.ZIP_DEFLATED)
 for foldername, subfolders, filenames in os.walk(sys.argv[1]):
     print('Adding files in {}'.format(foldername))
     bk_zip.write(foldername)
